@@ -59,19 +59,20 @@ public class Main {
 			System.err.println(e);
 		}
 	}
-
 	protected static Student getStudentData(int studentId, StudentRepository repo) {
-
+		// create an arrayList of the students, because iterables are too hard
 		ArrayList<Student> students = new ArrayList<>();
 		Iterables.addAll(students, repo);
-		for (Student student:students) {
-			if (student.getId() == studentId) {
-				return student;
+
+		for (int i = 0; i < students.size(); i++) {
+			if (i == studentId-1) {
+				return students.get(i);
 			}
 		}
-		throw new NoSuchElementException();
-	}
 
+		throw new NoSuchElementException();
+
+	}
 	protected static void handleResponse(Response response, int studentId) throws IOException {
 
 		response.setContentType("application/pdf");
